@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fetch a Dad Joke</title>
+  <style>
+    .container{
+      width: 90%;
+      max-width: 1200px;
+      margin-left: 6rem;
+      margin-top: 3rem;
+      line-height: 1.6;
+      padding: 0 auto;
+    }
+    
+    .card{
+      justify-items: center;
+      align-items: center;
+      box-shadow: rgba(0, 0, 0, 1.0);
+      padding: 2em;
+      border: 1px solid;
+      width: 30%;
+    }
+    
+    .card button{
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      padding: 4px;
+      color: #fff;
+      background-color: mediumseagreen;
+    }
+    
+    @media (max-width: 768px){
+    .card container {
+        flex-direction: column;
+    }
+    
+    .card button{
+      flex-direction: column;
+      margin: 0.5em 0;
+    }
+
+    .card h4{
+        font-size: 1.5em;
+    }
+
+    .card p{
+        font-size: 1em;
+    }
+}
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h4>Fetch the Dad Joke</h4>
+      <button id="loadJoke">Get Joke</button>
+      <p id="jokeResult"></p>
+    </div>
+  </div>
+
+<script>
+  document.getElementById("loadJoke").addEventListener("click", async () => {
+  const res = await fetch("https://icanhazdadjoke.com/", {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  const data = await res.json();
+  document.getElementById("jokeResult").innerText = data.joke;
+});
+</script>
+</body>
+</html>
